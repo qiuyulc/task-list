@@ -10,7 +10,7 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
     <Provider store={store}>
-      <HashRouter basename={"/task-list/"}>
+      <HashRouter basename={"/"}>
         <RouterView />
       </HashRouter>
     </Provider>

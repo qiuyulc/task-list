@@ -10,7 +10,7 @@ function RouterView() {
   const router = useRoutes([
     {
       path: "/",
-      element: <Navigate to={"home"} />,
+      element: <Navigate to={"/home"} />,
     },
     {
       path: "/",

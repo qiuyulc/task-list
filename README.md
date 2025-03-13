@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# My Week
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 简介
 
-Currently, two official plugins are available:
+### My Week 是什么
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+是一个小小的周报工具，用于记录一周的工作和个人的目标
 
-## Expanding the ESLint configuration
+### 为什么要做它
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+解决大计划太多，却没办法落地的问题。所以把计划拆分成小任务，不谈大目标，只坚持每周的任务。积少成多。
 
-- Configure the top-level `parserOptions` property like this:
+### 数据存储
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+使用 IndexedDB 存储数据，所以不用担心你的数据会被泄露。而且也没有做后端的打算，一切本着简单出发。
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 技术栈
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- React18
+- React-Router6
+- TypeScript
+- Vite
+- IndexedDB
+
+
+## 预览
+
+![image](./public/image.png)
+
+## 意见建议
+
+[issues](https://github.com/qiuyulc/task-list/issues/new)

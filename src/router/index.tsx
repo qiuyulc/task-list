@@ -31,11 +31,11 @@ function RouterView() {
         //   ],
         // },
         {
-          path: "/home",
+          path: "home",
           element: <Home />,
         },
         {
-          path: "/*",
+          path: "*",
           element: <h1>404</h1>,
         },
       ],

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 2</title>
+    <g id="页面" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01首页_天" transform="translate(-1112.000000, -335.000000)">
+            <g id="编组-7" transform="translate(750.000000, 200.000000)">
+                <g id="编组-2" transform="translate(362.000000, 135.000000)">
+                    <rect id="矩形" x="0" y="0" width="22" height="22"></rect>
+                    <g id="编组-10" transform="translate(4.330000, 4.330000)" stroke="#6F42FF" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon id="路径" points="13.3333333 13.3333333 13.3333333 0 6.66666667 0 6.66666667 5.33333333 0 5.33333333 0 13.3333333"></polygon>
+                        <polyline id="路径" points="5.66666667 8 4.33333333 9.33333333 5.66666667 10.6666667"></polyline>
+                        <polyline id="路径" points="10 6.33333333 10 9.33333333 4.33333333 9.33333333"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

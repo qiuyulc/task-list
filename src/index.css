@@ -1,0 +1,87 @@
+:root {
+  --bg-color:rgba(246, 246, 246, 1);
+  /* 主题色 */
+  --theme-color:rgba(111, 66, 255, 1);
+
+  /* tab切换 */
+  --tab-active-color:#fff;
+  --tab-color:rgba(51, 51, 51, 1);
+
+  /* banner */
+  --banner-shadow-color:rgba(0, 0, 0, 0.02);
+  --banner-bg-color:rgba(255, 255, 255, 1);
+  --banner-top-date-color:rgba(153, 153, 153, 1);
+  --banner-top-title-bg-after:rgba(111, 66, 255, 0.10);
+  --banner-top-title-border-color:rgba(242, 242, 242, 1);
+  --banner-input-placeholder:rgba(192, 192, 192, 1);
+
+  --banner-list-shadow-color:rgba(0,0,0,0.04);
+
+  --modal-mask-bg-color:rgba(0, 0, 0, 0.40);
+  --modal-bg-color:rgba(255, 255, 255, 1);
+  --modal-ch-color:rgba(201, 201, 201, 1);
+  --modal-header-bottom-color:rgba(242, 242, 242, 1);
+  /* 底部 */
+  --footer-color:rgba(153, 153, 153, 1);
+
+  --remove-color:rgba(219, 77, 77, 1);
+}
+
+h3{
+  margin:0;
+  padding:0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

@@ -3,14 +3,14 @@ import App from "@/App";
 // import Login from "@/views/login/login";
 // import Signin from "@/views/login/signin";
 import Home from "@/views/home";
-import { useRoutes, Navigate } from "react-router";
+import { useRoutes, Navigate } from "react-router-dom";
 
 
 function RouterView() {
   const router = useRoutes([
     {
       path: "/",
-      element: <Navigate to={"/home"} />,
+      element: <Navigate to={"home"} />,
     },
     {
       path: "/",

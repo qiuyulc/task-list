@@ -1,6 +1,6 @@
 import styles from './app.module.less'
 
-import {Outlet } from 'react-router'
+import { Outlet } from 'react-router-dom'
 function App() {
 
   return (

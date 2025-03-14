@@ -153,7 +153,10 @@ export const storeReducer = createSlice({
           if (resultIndex !== -1) {
             state.swiperIndex = resultIndex;
           }
-          state.weekTime = weekTime;
+          const hotday = new Date().toLocaleDateString();
+          state.weekTime = weekTime.map((u) => {
+            return { ...u, hot: u.date === hotday };
+          });
           state.weekTimeList = weekTimeList;
         }
       }
@@ -183,7 +186,13 @@ export const init = createAsyncThunk<InitResponse>(
       if (result.length === 0) {
         thunkAPI.dispatch(initWeekList());
         const state = thunkAPI.getState() as RootState;
-        indexedDB.addItem(state.storeReducer.weekTime, "weekTime");
+        const weekTime = state.storeReducer.weekTime.map((u) => {
+          return {
+            ...u,
+            hot: false,
+          };
+        });
+        indexedDB.addItem(weekTime, "weekTime");
         return { weekTime: [], weekTimeList: {} };
       } else if (result.length !== 7) {
         //表示有数据但是数据有缺失
@@ -192,12 +201,11 @@ export const init = createAsyncThunk<InitResponse>(
           weekListArr,
           result.map((item) => item.date)
         );
-        const hotday = new Date().toLocaleDateString();
         const timeArr = time.map((item) => {
           return {
             date: item,
             week_str: week[new Date(item).getDay() - 1],
-            hot: item === hotday,
+            hot: false,
             id: UUID.generate(),
             total: 0,
             completed: 0,
@@ -240,6 +248,7 @@ export const asyncAddWeekTimeList = createAsyncThunk(
     const state = thunkAPI.getState() as RootState;
     const { weekTimeList, weekTime } = state.storeReducer;
     const weekTimeItem = weekTime.find((item) => item.id === parentId);
+    console.log(weekTimeItem, 122);
     const weekTimeListItem = weekTimeList[parentId];
     indexedDB.editItem([weekTimeItem], "weekTime");
     indexedDB.editItem(

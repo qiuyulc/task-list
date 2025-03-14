@@ -149,14 +149,15 @@ export const storeReducer = createSlice({
       (state, action: PayloadAction<InitResponse>) => {
         const { weekTime, weekTimeList } = action.payload;
         if (weekTime.length > 0) {
-          const resultIndex = weekTime.findIndex((item) => item.hot);
-          if (resultIndex !== -1) {
-            state.swiperIndex = resultIndex;
-          }
+          
           const hotday = new Date().toLocaleDateString();
           state.weekTime = weekTime.map((u) => {
             return { ...u, hot: u.date === hotday };
           });
+          const resultIndex = state.weekTime.findIndex((item) => item.hot);
+          if (resultIndex !== -1) {
+            state.swiperIndex = resultIndex;
+          }
           state.weekTimeList = weekTimeList;
         }
       }

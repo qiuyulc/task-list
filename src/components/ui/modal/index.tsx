@@ -20,21 +20,12 @@ interface ModalProps {
 const Modal = (props: ModalProps) => {
   const [visible, setVisible] = useState(false);
   const { title, open, onClose, children, style = {}, footer } = props;
-  // const [closeStyle, setCloseStyle] = useState(styles.modal_show);
 
   useEffect(() => {
-    setVisible(open);
+    if (open) {
+      setVisible(true);
+    }
   }, [open]);
-
-  // const animationEnd = useCallback(() => {
-  //   if (closeStyle === styles.modal_hide) {
-  //     setVisible(false);
-  //     setCloseStyle(styles.modal_show);
-  //     if (onClose) {
-  //       onClose();
-  //     }
-  //   }
-  // }, [onClose, closeStyle]);
 
   return visible
     ? createPortal(
@@ -44,8 +35,6 @@ const Modal = (props: ModalProps) => {
             if (onClose) {
               onClose();
             }
-
-            // setCloseStyle(styles.modal_hide);
           }}
         >
           <div
@@ -53,9 +42,16 @@ const Modal = (props: ModalProps) => {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            // onAnimationEnd={animationEnd}
-            // ${closeStyle}
-            className={`${styles.modal_content} `}
+            onAnimationStart={() => {
+              if (!open) {
+                setTimeout(() => {
+                  setVisible(false);
+                },300);
+              }
+            }}
+            className={`${styles.modal_content} ${
+              open ? styles.modal_show : styles.modal_hide
+            }`}
           >
             <div className={styles.modal_header}>
               <div className={styles.title}>{title}</div>
@@ -65,7 +61,6 @@ const Modal = (props: ModalProps) => {
                   if (onClose) {
                     onClose();
                   }
-                  // setCloseStyle(styles.modal_hide);
                 }}
               >
                 <svg
@@ -89,7 +84,8 @@ const Modal = (props: ModalProps) => {
         </div>,
         document.body
       )
-    : "";
+    : null;
 };
+
 
 export default Modal;

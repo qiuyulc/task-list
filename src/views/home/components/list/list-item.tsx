@@ -15,6 +15,7 @@ import { useAppDispatch } from "@/redux/hook";
 import MyEditor from "@/components/ui/editor";
 import type { refProps } from "@/components/ui/editor";
 
+const { confirm } = Modal;
 // 定义一个Footer组件，接收一个props参数，包含onSave和onRemove两个函数
 const Footer = (props: { onSave: () => void; onRemove: () => void }) => {
   // 解构props参数，获取onSave和onRemove函数
@@ -100,8 +101,14 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
   };
 
   const handleRemove = () => {
-    // event.stopPropagation();
-    dispatch(asyncRemoveItem({ parentId, id, status }));
+    confirm({
+      title: "你确定要删除这条记录吗？",
+      onClose: () => {},
+      onOk: () => {
+        dispatch(asyncRemoveItem({ parentId, id, status }));
+      },
+    });
+    //
   };
 
   const handleGetHtml = () => {
@@ -137,7 +144,14 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
           <div className={styles.handle_list_box}>
             <ul className={styles.handle_list}>
               <li onClick={handleEdit}>编辑</li>
-              <li onClick={handleRemove}>删除</li>
+              <li
+                onClick={(event: React.MouseEvent<HTMLLIElement>) => {
+                  event.stopPropagation();
+                  handleRemove();
+                }}
+              >
+                删除
+              </li>
             </ul>
           </div>
         </div>

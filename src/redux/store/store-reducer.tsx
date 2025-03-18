@@ -149,7 +149,6 @@ export const storeReducer = createSlice({
       (state, action: PayloadAction<InitResponse>) => {
         const { weekTime, weekTimeList } = action.payload;
         if (weekTime.length > 0) {
-          
           const hotday = new Date().toLocaleDateString();
           state.weekTime = weekTime.map((u) => {
             return { ...u, hot: u.date === hotday };

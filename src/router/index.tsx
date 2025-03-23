@@ -1,9 +1,9 @@
 import App from "@/App";
-import User from "@/views/login";
-import Login from "@/views/login/login";
-import Signin from "@/views/login/signin";
+// import User from "@/views/login";
+// import Login from "@/views/login/login";
+// import Signin from "@/views/login/signin";
 import Home from "@/views/home";
-import Test from '@/views/test/index'
+// import Test from '@/views/test/index'
 import { useRoutes, Navigate } from "react-router-dom";
 
 

@@ -43,11 +43,10 @@ const Title = memo(
     );
   }
 );
-function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
-  const { status, title, id, parentId, text = "", weekStr, dateStr } = props;
-  const dispatch = useAppDispatch();
-  const editor = useRef<refProps>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+
+export const TitleCom = (props: { title: string; status: boolean }) => {
+  const { title, status } = props;
+
   const hotSvg = useMemo(() => {
     return status ? (
       <svg
@@ -84,9 +83,6 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
        a 42 42 0 0 1 0 -84"
           fill="#fff"
           className={styles.svg_path}
-          onAnimationEnd={() => {
-            console.log("执行结束");
-          }}
           strokeWidth="8"
           strokeDasharray="263.89"
           strokeDashoffset="263.89"
@@ -94,6 +90,21 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
       </svg>
     );
   }, [status]);
+
+  return (
+    <>
+      <div className={styles.icon}>{hotSvg}</div>
+      <div className={`${styles.title} ${status ? styles.no_hot_title : ""}`}>
+        {title}
+      </div>
+    </>
+  );
+};
+function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
+  const { status, title, id, parentId, text = "", weekStr, dateStr } = props;
+  const dispatch = useAppDispatch();
+  const editor = useRef<refProps>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleEdit = (event: React.MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
@@ -118,16 +129,6 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
       setModalOpen(false);
     }
   };
-  const TitleCom = () => {
-    return (
-      <>
-        <div className={styles.icon}>{hotSvg}</div>
-        <div className={`${styles.title} ${status ? styles.no_hot_title : ""}`}>
-          {title}
-        </div>
-      </>
-    );
-  };
 
   return (
     <>
@@ -138,7 +139,7 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
           // setHot(!hot);
         }}
       >
-        <TitleCom />
+        <TitleCom status={status} title={title} />
         <div className={styles.handle_icon}>
           <img src={handleIcon} alt="" />
           <div className={styles.handle_list_box}>
@@ -170,7 +171,7 @@ function ListItem(props: WeekList & { weekStr: string; dateStr: string }) {
               dispatch(asyncEditHot({ parentId, status: !status, id }));
             }}
           >
-            <TitleCom />
+            <TitleCom status={status} title={title} />
           </div>
           <MyEditor text={text} ref={editor} />
         </div>

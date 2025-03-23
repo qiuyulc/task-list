@@ -53,6 +53,11 @@ export const storeReducer = createSlice({
   name: "store_reducer",
   initialState,
   reducers: {
+    //处理单个排序问题
+    editWeekTimeList(state, action) {
+      const { parentId, data } = action.payload;
+      state.weekTimeList[parentId] = data;
+    },
     removeItem(state, action) {
       const { id, parentId, status } = action.payload;
       const children = state.weekTimeList[parentId];
@@ -248,7 +253,6 @@ export const asyncAddWeekTimeList = createAsyncThunk(
     const state = thunkAPI.getState() as RootState;
     const { weekTimeList, weekTime } = state.storeReducer;
     const weekTimeItem = weekTime.find((item) => item.id === parentId);
-    console.log(weekTimeItem, 122);
     const weekTimeListItem = weekTimeList[parentId];
     indexedDB.editItem([weekTimeItem], "weekTime");
     indexedDB.editItem(
@@ -318,6 +322,19 @@ export const asyncEditHot = createAsyncThunk(
     );
   }
 );
+
+//修改排序
+export const asyncEditWeekTimeList = createAsyncThunk(
+  "store_reducer/editWeekTimeList",
+  async (options: { parentId: string; data: WeekList[] }, thunkAPI) => {
+    thunkAPI.dispatch(editWeekTimeList(options));
+    indexedDB.editItem(
+      [{ id: options.parentId, data: options.data }],
+      "weekTimeList"
+    );
+  }
+);
+
 export const {
   initWeekList,
   setSwiperIndex,
@@ -325,5 +342,6 @@ export const {
   editHot,
   editText,
   removeItem,
+  editWeekTimeList,
 } = storeReducer.actions;
 export default storeReducer.reducer;

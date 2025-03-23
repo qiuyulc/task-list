@@ -5,8 +5,10 @@ import { SvgCircle } from "@/components/ui";
 import SearchInput from "../input";
 import List from "../list";
 import Empty from "../empty";
-const BannerItem = memo(function BannerItem(props: WeekTimeProps) {
-  const { date, total, completed, id, list = [], week_str } = props;
+const BannerItem = memo(function BannerItem(
+  props: WeekTimeProps & { parentId: string }
+) {
+  const { date, total, completed, id, list = [], week_str, parentId } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const handleDate = useMemo(() => {
@@ -60,7 +62,12 @@ const BannerItem = memo(function BannerItem(props: WeekTimeProps) {
       {list.length === 0 ? (
         <Empty text={<Text />} weekStr={week_str} />
       ) : (
-        <List list={list} weekStr={weekStr} dateStr={handleDate} />
+        <List
+          parentId={parentId}
+          list={list}
+          weekStr={weekStr}
+          dateStr={handleDate}
+        />
       )}
     </div>
   );

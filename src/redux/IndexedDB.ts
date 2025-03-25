@@ -19,15 +19,20 @@ export default class IndexedDB {
     storeName: string;
     keyPath: string;
   }[];
+  static openRequest: IDBOpenDBRequest;
 
   constructor(props: IndexedDBProps) {
     this.dbName = props.dbName;
     this.stores = props.stores;
-    this.init();
+    if (!IndexedDB.openRequest) {
+      this.init();
+    }
   }
 
   init() {
     const openRequest = indexedDB.open(this.dbName, 1);
+
+    IndexedDB.openRequest = openRequest;
     openRequest.onupgradeneeded = (event) => {
       const db = (event.target as IDBOpenDBRequest).result;
       for (let i = 0; i < this.stores.length; i++) {
@@ -40,6 +45,7 @@ export default class IndexedDB {
     };
 
     openRequest.onsuccess = () => {
+
       console.log("数据库打开成功");
     };
 
@@ -56,25 +62,25 @@ export default class IndexedDB {
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
     return Promise.all([
-        ...item.map((u) => {
-          return new Promise((resolve, reject) => {
-            const add = store.put(u);
-            add.onsuccess = () => {
-              resolve(add.result);
-            };
-            add.onerror = (err) => {
-              reject(err);
-            };
-          });
-        }),
-      ])
-        .then(() => {
-          return true;
-        })
-        .catch((err) => {
-          console.log("修改失败", err);
-          return false;
+      ...item.map((u) => {
+        return new Promise((resolve, reject) => {
+          const add = store.put(u);
+          add.onsuccess = () => {
+            resolve(add.result);
+          };
+          add.onerror = (err) => {
+            reject(err);
+          };
         });
+      }),
+    ])
+      .then(() => {
+        return true;
+      })
+      .catch((err) => {
+        console.log("修改失败", err);
+        return false;
+      });
   }
 
   async removeItem(item: string[], storeName: string): Promise<boolean> {
@@ -82,25 +88,25 @@ export default class IndexedDB {
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
     return Promise.all([
-        ...item.map((u) => {
-          return new Promise((resolve, reject) => {
-            const add = store.delete(u);
-            add.onsuccess = () => {
-              resolve(add.result);
-            };
-            add.onerror = (err) => {
-              reject(err);
-            };
-          });
-        }),
-      ])
-        .then(() => {
-          return true;
-        })
-        .catch((err) => {
-          console.log("删除失败", err);
-          return false;
+      ...item.map((u) => {
+        return new Promise((resolve, reject) => {
+          const add = store.delete(u);
+          add.onsuccess = () => {
+            resolve(add.result);
+          };
+          add.onerror = (err) => {
+            reject(err);
+          };
         });
+      }),
+    ])
+      .then(() => {
+        return true;
+      })
+      .catch((err) => {
+        console.log("删除失败", err);
+        return false;
+      });
   }
   async addItem<T>(item: T[], storeName: string): Promise<boolean> {
     const db = await this.openDB();
@@ -127,6 +133,23 @@ export default class IndexedDB {
         console.log("添加失败", err);
         return false;
       });
+  }
+
+  async getAll<T>(id: string[], storeName: string): Promise<T[]> {
+    const db = await this.openDB();
+    const transaction = db.transaction(storeName, "readonly");
+    const store = transaction.objectStore(storeName);
+    const keyRange = IDBKeyRange.bound(id[0], id[1], true, true);
+    const getAllRequest = store.getAll(keyRange);
+    return new Promise((resolve, reject) => {
+      getAllRequest.onsuccess = () => {
+        resolve(getAllRequest.result as T[]);
+        console.log(getAllRequest, "1111222");
+      };
+      getAllRequest.onerror = () => {
+        reject(getAllRequest.error);
+      };
+    });
   }
 
   async getItem<T>(id: string[], storeName: string): Promise<T[]> {

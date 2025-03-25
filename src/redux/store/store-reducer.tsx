@@ -16,6 +16,11 @@ export interface WeekListProps {
   [key: string]: WeekList[];
 }
 
+export interface weekTimeListItemProps{
+  id:string;
+  data:WeekList[]
+}
+
 export interface WeekTimeProps {
   hot?: boolean;
   date: string;

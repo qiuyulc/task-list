@@ -6,13 +6,14 @@ import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
 
 export type Props = {
   text: string;
+  disable?: boolean;
 };
 export type refProps = {
   getHtml: () => string;
 } | null;
 
 const MyEditor = forwardRef<refProps, Props>((props, ref) => {
-  const { text } = props;
+  const { text, disable } = props;
   // 编辑器实例，必须
   const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法
 
@@ -45,6 +46,11 @@ const MyEditor = forwardRef<refProps, Props>((props, ref) => {
     placeholder: "请输入内容...",
   };
 
+  useEffect(() => {
+    if (disable) {
+      editor?.disable();
+    }
+  }, [disable, editor]);
   // 及时销毁 editor ，重要！
   useEffect(() => {
     return () => {

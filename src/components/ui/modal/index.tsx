@@ -61,7 +61,6 @@ const Modal = (props: ModalProps) => {
                 <div
                   className={styles.icon}
                   onClick={() => {
-                    console.log(onClose, open);
                     if (onClose) {
                       onClose();
                     }

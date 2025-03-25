@@ -1,14 +1,24 @@
 import styles from "./index.module.less";
-import { useMemo, useRef, memo } from "react";
+import { useMemo, useRef, memo, ReactNode,CSSProperties } from "react";
 import { WeekTimeProps } from "@/redux/store/store-reducer";
 import { SvgCircle } from "@/components/ui";
 import SearchInput from "../input";
 import List from "../list";
 import Empty from "../empty";
 const BannerItem = memo(function BannerItem(
-  props: WeekTimeProps & { parentId: string }
+  props: WeekTimeProps & { parentId: string; children?: ReactNode;style?:CSSProperties }
 ) {
-  const { date, total, completed, id, list = [], week_str, parentId } = props;
+  const {
+    date,
+    total,
+    completed,
+    id,
+    list = [],
+    week_str,
+    parentId,
+    style={},
+    children,
+  } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const handleDate = useMemo(() => {
@@ -44,7 +54,7 @@ const BannerItem = memo(function BannerItem(
   };
 
   return (
-    <div className={styles.banner_item}>
+    <div className={styles.banner_item} style={{...style}}>
       <div className={styles.banner_item_top}>
         <div className={styles.banner_item_top_left}>
           <h3>
@@ -57,17 +67,24 @@ const BannerItem = memo(function BannerItem(
           <SvgCircle percent={handlePercent} />
         </div>
       </div>
-      <SearchInput ref={inputRef} id={id} />
 
-      {list.length === 0 ? (
-        <Empty text={<Text />} weekStr={week_str} />
+      {children ? (
+        children
       ) : (
-        <List
-          parentId={parentId}
-          list={list}
-          weekStr={weekStr}
-          dateStr={handleDate}
-        />
+        <>
+          <SearchInput ref={inputRef} id={id} />
+
+          {list.length === 0 ? (
+            <Empty text={<Text />} weekStr={week_str} />
+          ) : (
+            <List
+              parentId={parentId}
+              list={list}
+              weekStr={weekStr}
+              dateStr={handleDate}
+            />
+          )}
+        </>
       )}
     </div>
   );

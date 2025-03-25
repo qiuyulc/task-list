@@ -3,9 +3,10 @@ import App from "@/App";
 // import Login from "@/views/login/login";
 // import Signin from "@/views/login/signin";
 import Home from "@/views/home";
+import History from "@/views/history";
 // import Test from '@/views/test/index'
 import { useRoutes, Navigate } from "react-router-dom";
-
+import Version from "@/views/version";
 
 function RouterView() {
   const router = useRoutes([
@@ -35,6 +36,14 @@ function RouterView() {
         //     },
         //   ],
         // },
+        {
+          path: "version",
+          element: <Version />,
+        },
+        {
+          path: "history",
+          element: <History />,
+        },
         {
           path: "home",
           element: <Home />,

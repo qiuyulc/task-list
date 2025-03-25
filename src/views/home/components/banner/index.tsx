@@ -124,7 +124,6 @@ export default function SwiperBanner(props: SwiperBannerProps) {
         const newList = [...list];
         newList.splice(activeIndex, 1);
         newList.splice(overIndex, 0, list[activeIndex]);
-        console.log(newList, 112223333444);
         dispatch(
           asyncEditWeekTimeList({
             parentId,

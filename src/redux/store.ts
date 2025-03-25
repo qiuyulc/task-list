@@ -1,8 +1,10 @@
 import {configureStore } from '@reduxjs/toolkit'
 import storeReducer from './store/store-reducer'
+import historyListReducer from './store/history-reducer';
 const store = configureStore({
     reducer:{
-        storeReducer
+        storeReducer,
+        historyListReducer,
     }
 })
 

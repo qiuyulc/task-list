@@ -78,7 +78,7 @@
       }
       .handle_list_box {
         position: absolute;
-        z-index:100;
+        z-index: 100;
         top: 1.37rem;
         right: -16px;
         padding-top: 6px;
@@ -111,17 +111,18 @@
     }
   }
 }
-.modal_content{
-  width:100%;
-  height:100%;
+.modal_content {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding:0 2.5rem;
+  padding: 0 2.5rem;
   box-sizing: border-box;
-  
+
   .modal_title {
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
     display: flex;
     cursor: pointer;
     flex-shrink: 0;
@@ -129,11 +130,9 @@
       font-weight: 600;
       font-size: 1.13rem;
       line-height: 1.63rem;
-      
     }
   }
 }
-
 
 .icon {
   margin-right: 0.5rem;
@@ -154,7 +153,11 @@
 
 .title {
   flex-grow: 1;
-  font-size: 0.88rem;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.13rem;
   color: var(--tab-color);
 
   &.no_hot_title {

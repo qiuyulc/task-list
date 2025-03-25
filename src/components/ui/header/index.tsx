@@ -8,7 +8,7 @@ interface IHeaderProps {
 const HeaderCom = (props: IHeaderProps) => {
   const navigate = useNavigate();
   const { children } = props;
-  const [toolshow, setToolshow] = useState(false);
+  const [toolshow, setToolshow] = useState(true);
 
   return (
     <header className={styles.header}>

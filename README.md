@@ -31,7 +31,3 @@
 ## 意见建议
 
 [issues](https://github.com/qiuyulc/task-list/issues/new)
-
-## 更新记录
-
-- 2025-03-23：增加任务列表排序

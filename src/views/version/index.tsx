@@ -2,7 +2,6 @@ import styles from "./index.module.less";
 import HeaderCom from "@/components/ui/header";
 const Version = () => {
   const data = [
-    
     {
       title: "v1.0.2",
       date: "2025-03-25",

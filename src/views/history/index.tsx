@@ -53,7 +53,7 @@ const History = () => {
   return (
     <div className={styles.history}>
       <HeaderCom>
-        <h3>历史记录</h3>
+        <h2>历史记录</h2>
       </HeaderCom>
 
       <div className={styles.date_box}>

@@ -23,7 +23,7 @@ const HeaderCom = (props: IHeaderProps) => {
       <div className={styles.nav_tab}>{children}</div>
       <div
         className={styles.user_user_tool}
-        style={{ width: toolshow ? `calc(${2.88 * 2}rem + ${20}px)` : 0 }}
+        style={{ width: toolshow ? `calc(${2.88 * 3}rem + ${20}px)` : 0 }}
       >
         <div
           className={styles.history}
@@ -38,6 +38,13 @@ const HeaderCom = (props: IHeaderProps) => {
             navigate("/version");
           }}
           title={"版本记录"}
+        ></div>
+        <div
+          className={styles.github}
+          onClick={() => {
+            window.open('https://github.com/qiuyulc/task-list', '_blank');
+          }}
+          title={"github"}
         ></div>
       </div>
       <div

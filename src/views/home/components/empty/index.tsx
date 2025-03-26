@@ -15,7 +15,6 @@ const Empty = ({weekStr,text}:{weekStr:string,text?:string|ReactNode})=>{
     const images = [one, two, three, four, five, six, seven];
 
     const index = week.indexOf(weekStr);
-    console.log(index,weekStr)
     return <div className={styles.empty}>
         <div className={styles.empty_img} style={{backgroundImage:`url(${images[index]})`}}></div>
         <div className={styles.empty_text}>

@@ -42,7 +42,6 @@ const BannerItem = memo(function BannerItem(
         <span
           style={{ color: "rgba(51, 51, 51, 1)", cursor: "pointer" }}
           onClick={() => {
-            console.log(inputRef);
             inputRef.current?.focus();
           }}
         >

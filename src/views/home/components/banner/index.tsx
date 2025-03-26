@@ -109,7 +109,6 @@ export default function SwiperBanner(props: SwiperBannerProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
-      console.log(active, over);
       const { data: activeData } = active;
       const { current: activeCurrent = {} } = activeData;
       const parentId = activeCurrent.sortable.containerId;
@@ -148,7 +147,6 @@ export default function SwiperBanner(props: SwiperBannerProps) {
 
   const item = weekTimeList[activeId.parentId];
   const activeItem = item && item.find((item) => item.id === activeId.id);
-  console.log(activeItem, "activeItem");
 
   return (
     <div className={styles.swiper_banner}>

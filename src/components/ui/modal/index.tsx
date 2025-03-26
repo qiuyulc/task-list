@@ -45,7 +45,6 @@ const Modal = (props: ModalProps) => {
             }}
             onAnimationStart={() => {
               if (!open) {
-                console.log(open, 111);
                 setTimeout(() => {
                   setVisible(false);
                 }, 300);

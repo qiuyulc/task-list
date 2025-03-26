@@ -144,7 +144,6 @@ export default class IndexedDB {
     return new Promise((resolve, reject) => {
       getAllRequest.onsuccess = () => {
         resolve(getAllRequest.result as T[]);
-        console.log(getAllRequest, "1111222");
       };
       getAllRequest.onerror = () => {
         reject(getAllRequest.error);

@@ -47,6 +47,7 @@ export default defineConfig({
   plugins: [
     react(),
     vitePluginImagePreload({
+      baseUrl:'assets/images',
       data: [
         "one.svg",
         "two.svg",
